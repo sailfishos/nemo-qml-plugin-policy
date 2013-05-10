@@ -1,0 +1,30 @@
+The org.nemomobile.policy QML plugin provides an API for communicating with the
+libresource policy manager.
+
+import QtQuick 1.1
+import org.nemomobile.policy
+
+Item {
+    id: volumeHandler
+
+    focus: true
+
+    Keys.enabled: permissions.acquired
+    Keys.onPressed: {
+        if (event.key == Qt.Key_VolumeUp) {
+            // increase volume
+        } else if (event.key == Qt.Key_VolumeDown) {
+            // decrease volume
+        }
+    }
+
+    Permissions {
+        enabled: volumeHandler.activeFocus
+        autoRelease: true
+        applicationClass: "player"
+
+        Resource {
+            type: Resource.ScaleButton
+        }
+    }
+}
