@@ -121,9 +121,14 @@ int Permissions::resourcesCount(QDeclarativeListProperty<Resource> *property)
     return qobject_cast<Permissions *>(property->object)->m_resources.count();
 }
 
+void Permissions::resourcesClear(QDeclarativeListProperty<Resource> *)
+{
+}
+
 QDeclarativeListProperty<Resource> Permissions::resources()
 {
-    return QDeclarativeListProperty<Resource>(this, 0, resourcesAppend, resourcesCount, resourcesAt);
+    return QDeclarativeListProperty<Resource>(
+                this, 0, resourcesAppend, resourcesCount, resourcesAt, resourcesClear);
 }
 
 void Permissions::resourceRequiredChanged(Resource *resource)
