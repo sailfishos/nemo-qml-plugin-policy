@@ -113,6 +113,7 @@ private:
     static void resourcesAppend(QDeclarativeListProperty<Resource> *property, Resource *resource);
     static Resource *resourcesAt(QDeclarativeListProperty<Resource> *property, int index);
     static int resourcesCount(QDeclarativeListProperty<Resource> *property);
+    static void resourcesClear(QDeclarativeListProperty<Resource> *property);
 
     QString m_applicationClass;
     QList<Resource *> m_resources;
