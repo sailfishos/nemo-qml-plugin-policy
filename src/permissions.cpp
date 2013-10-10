@@ -201,28 +201,29 @@ void Permissions::updateOk()
 
 void Permissions::resourcesDenied()
 {
-    if (m_acquired) {
-        m_acquired = false;
-
-        for (int i = 0; i < m_resources.count(); ++i)
-            m_resources.at(i)->clearAcquired();
-
-        emit acquiredChanged();
-    }
+    clearAcquired();
     emit denied();
 }
 
 void Permissions::resourcesReleased()
 {
+    clearAcquired();
     emit released();
 }
 
 void Permissions::resourcesReleasedByManager()
 {
+    clearAcquired();
     emit releasedByManager();
 }
 
 void Permissions::lostResources()
+{
+    clearAcquired();
+    emit lost();
+}
+
+void Permissions::clearAcquired()
 {
     if (m_acquired) {
         m_acquired = false;
@@ -232,5 +233,4 @@ void Permissions::lostResources()
 
         emit acquiredChanged();
     }
-    emit lost();
 }
