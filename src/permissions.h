@@ -110,6 +110,8 @@ private slots:
     void lostResources();
 
 private:
+    void clearAcquired();
+
     static void resourcesAppend(QDeclarativeListProperty<Resource> *property, Resource *resource);
     static Resource *resourcesAt(QDeclarativeListProperty<Resource> *property, int index);
     static int resourcesCount(QDeclarativeListProperty<Resource> *property);
