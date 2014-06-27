@@ -128,8 +128,12 @@ void Resource::clearResource()
 ResourcePolicy::Resource *Resource::createResource()
 {
     switch (m_type) {
-    case AudioPlayback:
-        return new ResourcePolicy::AudioResource;
+    case AudioPlayback: {
+        ResourcePolicy::AudioResource *audioResource = new ResourcePolicy::AudioResource;
+        audioResource->setProcessID(QCoreApplication::applicationPid());
+        audioResource->setStreamTag("media.name", "*");
+        return audioResource;
+    }
     case VideoPlayback:
         return new ResourcePolicy::VideoResource;
     case AudioRecorder:
