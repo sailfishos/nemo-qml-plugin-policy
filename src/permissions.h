@@ -35,15 +35,8 @@
 #include <QObject>
 #include <QString>
 
-#if QT_VERSION_5
-# include <QQmlParserStatus>
-# include <QQmlListProperty>
-# define QDeclarativeParserStatus QQmlParserStatus
-# define QDeclarativeListProperty QQmlListProperty
-#else
-# include <QDeclarativeParserStatus>
-# include <QDeclarativeListProperty>
-#endif
+#include <QQmlParserStatus>
+#include <QQmlListProperty>
 
 #include <policy/resource.h>
 #include <policy/resources.h>
@@ -51,19 +44,15 @@
 
 class Resource;
 
-class Permissions : public QObject, public QDeclarativeParserStatus
+class Permissions : public QObject, public QQmlParserStatus
 {
     Q_OBJECT
     Q_PROPERTY(QString applicationClass READ applicationClass WRITE setApplicationClass NOTIFY applicationClassChanged)
     Q_PROPERTY(bool autoRelease READ autoRelease WRITE setAutoRelease NOTIFY autoReleaseChanged)
-#ifdef QT_VERSION_5
     Q_PROPERTY(QQmlListProperty<Resource> resources READ resources)
-#else
-    Q_PROPERTY(QDeclarativeListProperty<Resource> resources READ resources)
-#endif
     Q_PROPERTY(bool enabled READ isEnabled WRITE setEnabled NOTIFY enabledChanged)
     Q_PROPERTY(bool acquired READ isAcquired NOTIFY acquiredChanged)
-    Q_INTERFACES(QDeclarativeParserStatus)
+    Q_INTERFACES(QQmlParserStatus)
     Q_CLASSINFO("DefaultProperty", "resources")
 public:
     explicit Permissions(QObject *parent = 0);
@@ -77,7 +66,7 @@ public:
     bool autoRelease() const;
     void setAutoRelease(bool release);
 
-    QDeclarativeListProperty<Resource> resources();
+    QQmlListProperty<Resource> resources();
 
     void resourceRequiredChanged(Resource *resource);
 
@@ -112,10 +101,10 @@ private slots:
 private:
     void clearAcquired();
 
-    static void resourcesAppend(QDeclarativeListProperty<Resource> *property, Resource *resource);
-    static Resource *resourcesAt(QDeclarativeListProperty<Resource> *property, int index);
-    static int resourcesCount(QDeclarativeListProperty<Resource> *property);
-    static void resourcesClear(QDeclarativeListProperty<Resource> *property);
+    static void resourcesAppend(QQmlListProperty<Resource> *property, Resource *resource);
+    static Resource *resourcesAt(QQmlListProperty<Resource> *property, int index);
+    static int resourcesCount(QQmlListProperty<Resource> *property);
+    static void resourcesClear(QQmlListProperty<Resource> *property);
 
     QString m_applicationClass;
     QList<Resource *> m_resources;

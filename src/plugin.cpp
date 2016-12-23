@@ -31,35 +31,26 @@
 
 #include <QtGlobal>
 
-#if QT_VERSION >= QT_VERSION_CHECK(5, 0, 0)
-# include <QtQml>
-# include <QQmlEngine>
-# include <QQmlExtensionPlugin>
-# define QDeclarativeEngine QQmlEngine
-# define QDeclarativeExtensionPlugin QQmlExtensionPlugin
-#else
-# include <QtDeclarative>
-# include <QDeclarativeEngine>
-# include <QDeclarativeExtensionPlugin>
-#endif
+#include <QtQml>
+#include <QQmlEngine>
+#include <QQmlExtensionPlugin>
 
 #include "resource.h"
 #include "permissions.h"
 
-class PolicyPlugin : public QDeclarativeExtensionPlugin
+class PolicyPlugin : public QQmlExtensionPlugin
 {
     Q_OBJECT
-#if QT_VERSION >= QT_VERSION_CHECK(5, 0, 0)
-    Q_PLUGIN_METADATA(IID "org.nemomobile.policy")
-#endif
+    Q_PLUGIN_METADATA(IID "Nemo.Policy")
+
 public:
-    void initializeEngine(QDeclarativeEngine *engine, const char *uri) {
-        Q_ASSERT(QLatin1String(uri) == QLatin1String("org.nemomobile.policy"));
+    void initializeEngine(QQmlEngine *engine, const char *uri) {
+        Q_ASSERT(QLatin1String(uri) == QLatin1String("Nemo.Policy") || QLatin1String(uri) == QLatin1String("org.nemomobile.policy"));
     }
 
     virtual void registerTypes(const char *uri)
     {
-        Q_ASSERT(QLatin1String(uri) == QLatin1String("org.nemomobile.policy"));
+        Q_ASSERT(QLatin1String(uri) == QLatin1String("Nemo.Policy") || QLatin1String(uri) == QLatin1String("org.nemomobile.policy"));
         qmlRegisterType<Resource>(uri, 1, 0, "Resource");
         qmlRegisterType<Permissions>(uri, 1, 0, "Permissions");
     }
@@ -67,6 +58,3 @@ public:
 
 #include "plugin.moc"
 
-#if QT_VERSION < QT_VERSION_CHECK(5, 0, 0)
-Q_EXPORT_PLUGIN2(nemopolicy, PolicyPlugin);
-#endif

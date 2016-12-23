@@ -1,8 +1,8 @@
-The org.nemomobile.policy QML plugin provides an API for communicating with the
+The Nemo.Policy QML plugin provides an API for communicating with the
 libresource policy manager.
 
-import QtQuick 1.1
-import org.nemomobile.policy
+import QtQuick 2.0
+import Nemo.Policy
 
 Item {
     id: volumeHandler
