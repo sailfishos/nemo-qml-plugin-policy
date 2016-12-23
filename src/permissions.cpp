@@ -98,7 +98,7 @@ void Permissions::setAutoRelease(bool release)
     }
 }
 
-void Permissions::resourcesAppend(QDeclarativeListProperty<Resource> *property, Resource *resource)
+void Permissions::resourcesAppend(QQmlListProperty<Resource> *property, Resource *resource)
 {
     Permissions *permissions = qobject_cast<Permissions *>(property->object);
 
@@ -111,23 +111,23 @@ void Permissions::resourcesAppend(QDeclarativeListProperty<Resource> *property, 
     }
 }
 
-Resource *Permissions::resourcesAt(QDeclarativeListProperty<Resource> *property, int index)
+Resource *Permissions::resourcesAt(QQmlListProperty<Resource> *property, int index)
 {
     return qobject_cast<Permissions *>(property->object)->m_resources.at(index);
 }
 
-int Permissions::resourcesCount(QDeclarativeListProperty<Resource> *property)
+int Permissions::resourcesCount(QQmlListProperty<Resource> *property)
 {
     return qobject_cast<Permissions *>(property->object)->m_resources.count();
 }
 
-void Permissions::resourcesClear(QDeclarativeListProperty<Resource> *)
+void Permissions::resourcesClear(QQmlListProperty<Resource> *)
 {
 }
 
-QDeclarativeListProperty<Resource> Permissions::resources()
+QQmlListProperty<Resource> Permissions::resources()
 {
-    return QDeclarativeListProperty<Resource>(
+    return QQmlListProperty<Resource>(
                 this, 0, resourcesAppend, resourcesCount, resourcesAt, resourcesClear);
 }
 
