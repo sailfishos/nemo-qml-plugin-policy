@@ -41,16 +41,16 @@
 class PolicyPlugin : public QQmlExtensionPlugin
 {
     Q_OBJECT
-    Q_PLUGIN_METADATA(IID "org.nemomobile.policy")
+    Q_PLUGIN_METADATA(IID "Nemo.Policy")
 
 public:
     void initializeEngine(QQmlEngine *engine, const char *uri) {
-        Q_ASSERT(QLatin1String(uri) == QLatin1String("org.nemomobile.policy"));
+        Q_ASSERT(QLatin1String(uri) == QLatin1String("Nemo.Policy") || QLatin1String(uri) == QLatin1String("org.nemomobile.policy"));
     }
 
     virtual void registerTypes(const char *uri)
     {
-        Q_ASSERT(QLatin1String(uri) == QLatin1String("org.nemomobile.policy"));
+        Q_ASSERT(QLatin1String(uri) == QLatin1String("Nemo.Policy") || QLatin1String(uri) == QLatin1String("org.nemomobile.policy"));
         qmlRegisterType<Resource>(uri, 1, 0, "Resource");
         qmlRegisterType<Permissions>(uri, 1, 0, "Permissions");
     }

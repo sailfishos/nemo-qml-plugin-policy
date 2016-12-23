@@ -1,5 +1,5 @@
 TARGET = nemopolicy
-PLUGIN_IMPORT_PATH = org/nemomobile/policy
+PLUGIN_IMPORT_PATH = Nemo/Policy
 
 TEMPLATE = lib
 CONFIG += qt plugin hide_symbols link_pkgconfig

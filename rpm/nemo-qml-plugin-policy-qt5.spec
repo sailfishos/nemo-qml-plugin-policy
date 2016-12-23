@@ -39,6 +39,11 @@ make %{?jobs:-j%jobs}
 rm -rf %{buildroot}
 # >> install pre
 # << install pre
+
+# org.nemomobile.policy legacy import
+mkdir -p %{buildroot}%{_libdir}/qt5/qml/org/nemomobile/policy/
+ln -sf %{_libdir}/qt5/qml/Nemo/Policy/libnemopolicy.so %{buildroot}%{_libdir}/qt5/qml/org/nemomobile/policy/
+sed 's/Nemo.Policy/org.nemomobile.policy/' < src/qmldir > %{buildroot}%{_libdir}/qt5/qml/org/nemomobile/policy/qmldir
 %qmake_install
 
 # >> install post
@@ -46,6 +51,12 @@ rm -rf %{buildroot}
 
 %files
 %defattr(-,root,root,-)
+%dir %{_libdir}/qt5/qml/Nemo/Policy
+%{_libdir}/qt5/qml/Nemo/Policy/libnemopolicy.so
+%{_libdir}/qt5/qml/Nemo/Policy/qmldir
+
+# org.nemomobile.policy legacy import
+%dir %{_libdir}/qt5/qml/org/nemomobile/policy
 %{_libdir}/qt5/qml/org/nemomobile/policy/libnemopolicy.so
 %{_libdir}/qt5/qml/org/nemomobile/policy/qmldir
 # >> files
