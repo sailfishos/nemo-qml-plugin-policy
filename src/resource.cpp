@@ -152,11 +152,14 @@ ResourcePolicy::Resource *Resource::createResource()
         return new ResourcePolicy::LockButtonResource;
     case ScaleButton:
         return new ResourcePolicy::ScaleButtonResource;
+    case SnapButton:
+        return new ResourcePolicy::SnapButtonResource;
     case LensCover:
         return new ResourcePolicy::LensCoverResource;
     case HeadsetButtons:
         return new ResourcePolicy::HeadsetButtonsResource;
     default:
+        qWarning() << "Resource type not supported" << m_type;
         return 0;
     }
 }
