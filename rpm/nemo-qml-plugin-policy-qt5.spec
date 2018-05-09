@@ -36,6 +36,7 @@ sed 's/Nemo.Policy/org.nemomobile.policy/' < src/qmldir > %{buildroot}%{_libdir}
 %defattr(-,root,root,-)
 %dir %{_libdir}/qt5/qml/Nemo/Policy
 %{_libdir}/qt5/qml/Nemo/Policy/libnemopolicy.so
+%{_libdir}/qt5/qml/Nemo/Policy/plugins.qmltypes
 %{_libdir}/qt5/qml/Nemo/Policy/qmldir
 
 # org.nemomobile.policy legacy import
