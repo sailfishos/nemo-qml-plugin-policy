@@ -1,8 +1,5 @@
 Name:       nemo-qml-plugin-policy-qt5
 
-# >> macros
-# << macros
-
 Summary:    Resource policy plugin for Nemo Mobile
 Version:    0.0.0
 Release:    1
@@ -21,33 +18,19 @@ Provides:   nemo-qml-plugins-policy-qt5
 %prep
 %setup -q -n %{name}-%{version}
 
-# >> setup
-# << setup
-
 %build
-# >> build pre
-# << build pre
-
 %qmake5 
 
 make %{?jobs:-j%jobs}
 
-# >> build post
-# << build post
-
 %install
 rm -rf %{buildroot}
-# >> install pre
-# << install pre
 
 # org.nemomobile.policy legacy import
 mkdir -p %{buildroot}%{_libdir}/qt5/qml/org/nemomobile/policy/
 ln -sf %{_libdir}/qt5/qml/Nemo/Policy/libnemopolicy.so %{buildroot}%{_libdir}/qt5/qml/org/nemomobile/policy/
 sed 's/Nemo.Policy/org.nemomobile.policy/' < src/qmldir > %{buildroot}%{_libdir}/qt5/qml/org/nemomobile/policy/qmldir
 %qmake_install
-
-# >> install post
-# << install post
 
 %files
 %defattr(-,root,root,-)
@@ -59,5 +42,3 @@ sed 's/Nemo.Policy/org.nemomobile.policy/' < src/qmldir > %{buildroot}%{_libdir}
 %dir %{_libdir}/qt5/qml/org/nemomobile/policy
 %{_libdir}/qt5/qml/org/nemomobile/policy/libnemopolicy.so
 %{_libdir}/qt5/qml/org/nemomobile/policy/qmldir
-# >> files
-# << files
