@@ -1,11 +1,10 @@
 Name:       nemo-qml-plugin-policy-qt5
 
 Summary:    Resource policy plugin for Nemo Mobile
-Version:    0.0.0
+Version:    0.1.4
 Release:    1
-Group:      System/Libraries
 License:    BSD
-URL:        https://git.merproject.org/mer-core/nemo-qml-plugin-policy
+URL:        https://github.com/sailfishos/nemo-qml-plugin-policy
 Source0:    %{name}-%{version}.tar.bz2
 BuildRequires:  pkgconfig(Qt5Core)
 BuildRequires:  pkgconfig(Qt5Qml)
@@ -21,10 +20,9 @@ Provides:   nemo-qml-plugins-policy-qt5
 %build
 %qmake5 
 
-make %{?jobs:-j%jobs}
+%make_build
 
 %install
-rm -rf %{buildroot}
 
 # org.nemomobile.policy legacy import
 mkdir -p %{buildroot}%{_libdir}/qt5/qml/org/nemomobile/policy/
@@ -34,6 +32,7 @@ sed 's/Nemo.Policy/org.nemomobile.policy/' < src/qmldir > %{buildroot}%{_libdir}
 
 %files
 %defattr(-,root,root,-)
+%license LICENSE.BSD
 %dir %{_libdir}/qt5/qml/Nemo/Policy
 %{_libdir}/qt5/qml/Nemo/Policy/libnemopolicy.so
 %{_libdir}/qt5/qml/Nemo/Policy/plugins.qmltypes
