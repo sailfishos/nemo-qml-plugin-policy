@@ -34,6 +34,7 @@
 #include <QtQml>
 #include <QQmlEngine>
 #include <QQmlExtensionPlugin>
+#include <QDebug>
 
 #include "resource.h"
 #include "permissions.h"
@@ -44,13 +45,17 @@ class PolicyPlugin : public QQmlExtensionPlugin
     Q_PLUGIN_METADATA(IID "Nemo.Policy")
 
 public:
-    void initializeEngine(QQmlEngine *engine, const char *uri) {
+    void initializeEngine(QQmlEngine *engine, const char *uri)
+    {
         Q_ASSERT(QLatin1String(uri) == QLatin1String("Nemo.Policy") || QLatin1String(uri) == QLatin1String("org.nemomobile.policy"));
     }
 
     virtual void registerTypes(const char *uri)
     {
         Q_ASSERT(QLatin1String(uri) == QLatin1String("Nemo.Policy") || QLatin1String(uri) == QLatin1String("org.nemomobile.policy"));
+        if (uri == QLatin1String("org.nemomobile.policy")) {
+            qWarning() << "org.nemomobile.policy is deprecated qml module name and subject to be removed. Please migrate to Nemo.Policy";
+        }
         qmlRegisterType<Resource>(uri, 1, 0, "Resource");
         qmlRegisterType<Permissions>(uri, 1, 0, "Permissions");
     }
